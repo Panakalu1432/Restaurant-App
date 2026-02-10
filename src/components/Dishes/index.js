@@ -13,10 +13,15 @@ import {
   CustomizationText,
   DishNotAv,
   NonVegIcon,
-} from './src/components/StyledComponents'
+} from '../../StyledComponents'
 
 const Dishes = props => {
-  const {dish, onIncrementCartItem, onDecrementCartItem} = props
+  const {
+    dish,
+    addCartItem,
+    incrementCartItemQuantity,
+    decrementCartItemQuantity,
+  } = props
   const [itemCo, setItemCo] = useState(0)
   const {
     addonCat,
@@ -50,7 +55,7 @@ const Dishes = props => {
               onClick={() => {
                 if (itemCo > 0) {
                   setItemCo(itemCo - 1)
-                  onDecrementCartItem()
+                  decrementCartItemQuantity(dish.dish_id)
                 }
               }}
             >
@@ -60,7 +65,7 @@ const Dishes = props => {
             <button
               onClick={() => {
                 setItemCo(itemCo + 1)
-                onIncrementCartItem()
+                addCartItem(dish)
               }}
             >
               +

@@ -1,5 +1,25 @@
-import CartContext from './src/context/CartContext'
+import CartContext from '../../context/CartContext'
 import NavBar from '../NavBar'
+
+import {
+  CartContainer,
+  CartContent,
+  CartHeader,
+  RemoveAllButton,
+  CartList,
+  CartItem,
+  DishImage,
+  DishDetails,
+  DishName,
+  DishPrice,
+  QuantityContainer,
+  QuantityButton,
+  QuantityText,
+  RemoveButton,
+  EmptyCartContainer,
+  EmptyCartImage,
+  EmptyCartText,
+} from './StyledComponents'
 
 const Cart = () => (
   <CartContext.Consumer>
@@ -12,43 +32,60 @@ const Cart = () => (
         removeAllCartItems,
       } = value
 
-      if (cartList.length === 0) {
-        return (
-          <>
-            <NavBar />
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png"
-              alt="empty cart"
-            />
-          </>
-        )
-      }
+      const showEmptyView = cartList.length === 0
 
       return (
-        <>
+        <CartContainer>
           <NavBar />
-          <button onClick={removeAllCartItems}>Remove All</button>
+          {showEmptyView ? (
+            <EmptyCartContainer>
+              <EmptyCartImage
+                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png"
+                alt="empty cart"
+              />
+              <EmptyCartText>Your Cart Is Empty</EmptyCartText>
+            </EmptyCartContainer>
+          ) : (
+            <CartContent>
+              <CartHeader>
+                <RemoveAllButton onClick={removeAllCartItems}>
+                  Remove All
+                </RemoveAllButton>
+              </CartHeader>
 
-          {cartList.map(item => (
-            <div key={item.dish_id}>
-              <img src={item.dish_image} alt={item.dish_name} />
-              <p>{item.dish_name}</p>
-              <p>₹ {item.dish_price * item.quantity}</p>
+              <CartList>
+                {cartList.map(item => (
+                  <CartItem key={item.dish_id}>
+                    <DishImage src={item.dish_image} alt={item.dish_name} />
 
-              <button onClick={() => decrementCartItemQuantity(item.dish_id)}>
-                -
-              </button>
-              <span>{item.quantity}</span>
-              <button onClick={() => incrementCartItemQuantity(item.dish_id)}>
-                +
-              </button>
+                    <DishDetails>
+                      <DishName>{item.dish_name}</DishName>
+                      <DishPrice>₹ {item.dish_price * item.quantity}</DishPrice>
+                    </DishDetails>
 
-              <button onClick={() => removeCartItem(item.dish_id)}>
-                Remove
-              </button>
-            </div>
-          ))}
-        </>
+                    <QuantityContainer>
+                      <QuantityButton
+                        onClick={() => decrementCartItemQuantity(item.dish_id)}
+                      >
+                        -
+                      </QuantityButton>
+                      <QuantityText>{item.quantity}</QuantityText>
+                      <QuantityButton
+                        onClick={() => incrementCartItemQuantity(item.dish_id)}
+                      >
+                        +
+                      </QuantityButton>
+                    </QuantityContainer>
+
+                    <RemoveButton onClick={() => removeCartItem(item.dish_id)}>
+                      Remove
+                    </RemoveButton>
+                  </CartItem>
+                ))}
+              </CartList>
+            </CartContent>
+          )}
+        </CartContainer>
       )
     }}
   </CartContext.Consumer>

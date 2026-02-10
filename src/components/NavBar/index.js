@@ -1,6 +1,17 @@
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import CartContext from './src/context/CartContext'
+import CartContext from '../../context/CartContext'
+
+// Import the styles we defined in the other file
+import {
+  NavContainer,
+  LogoLink,
+  LogoText,
+  NavActions,
+  StyledCartLink,
+  CartCountBadge,
+  LogoutButton,
+} from './StyledComponents'
 
 const NavBar = props => (
   <CartContext.Consumer>
@@ -15,15 +26,22 @@ const NavBar = props => (
       }
 
       return (
-        <nav>
-          <Link to="/">
-            <h1>Restaurant</h1>
-          </Link>
+        <NavContainer>
+          <LogoLink to="/">
+            <LogoText>
+              Uni<span>Resto</span>
+            </LogoText>
+          </LogoLink>
 
-          <Link to="/cart">Cart ({cartCount})</Link>
+          <NavActions>
+            <StyledCartLink to="/cart">
+              Cart
+              {cartCount > 0 && <CartCountBadge>{cartCount}</CartCountBadge>}
+            </StyledCartLink>
 
-          <button onClick={onLogout}>Logout</button>
-        </nav>
+            <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+          </NavActions>
+        </NavContainer>
       )
     }}
   </CartContext.Consumer>

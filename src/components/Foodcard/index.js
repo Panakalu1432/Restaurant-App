@@ -1,8 +1,8 @@
-import CartContext from './src/context/CartContext'
-import {FoodItemContainer} from './src/components/StyledComponents'
+import CartContext from '../../context/CartContext'
+import {FoodItemContainer} from '../../StyledComponents'
 import Dishes from './../Dishes'
 
-const Foocard = props => {
+const Foodcard = props => {
   const {item} = props
   const {categoryDishes} = item
 
@@ -33,4 +33,4 @@ const Foocard = props => {
   )
 }
 
-export default Foocard
+export default Foodcard
