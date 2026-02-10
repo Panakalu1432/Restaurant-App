@@ -13,7 +13,7 @@ import {
   CustomizationText,
   DishNotAv,
   NonVegIcon,
-} from './StyledComponents'
+} from './src/components/StyledComponents'
 
 const Dishes = props => {
   const {dish, onIncrementCartItem, onDecrementCartItem} = props
