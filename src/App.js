@@ -3,14 +3,17 @@ import CartProvider from './context/CartProvider'
 import Home from './components/Home'
 import Cart from './components/Cart'
 import NotFound from './components/NotFound'
+import LoginForm from './components/LoginForm'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => (
   <BrowserRouter>
     <CartProvider>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/not-found" component={NotFound} />
+        <Route exact path="/login" component={LoginForm} />
+        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path="/cart" component={Cart} />
+        <ProtectedRoute exact path="/not-found" component={NotFound} />
       </Switch>
     </CartProvider>
   </BrowserRouter>

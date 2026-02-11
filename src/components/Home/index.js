@@ -65,7 +65,9 @@ const Home = () => {
             <li key={each.menuCategoryId}>
               <CategoryButton
                 onClick={() => setTab(each.menuCategoryId)}
-                $active={Number(tab) === Number(each.menuCategoryId)}  type="button" >
+                $active={Number(tab) === Number(each.menuCategoryId)}
+                type="button"
+              >
                 {each.menuCategory}
               </CategoryButton>
             </li>
